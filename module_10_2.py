@@ -8,20 +8,21 @@ class Knight(threading.Thread):
         self.name = name
         self.power = power
 
-    def run(self):
+        def run(self):
         print(f'{self.name}, на нас напали!!!')
         count_day = 1
         count_warriors = 100 - self.power
-        for i in range(100):
-            if count_warriors == 0:
-                print(f'{self.name} сражается {count_day} день(дня), осталось {count_warriors} воинов \n{self.name}'
-                      f' одержал победу {count_day} спустя')
-                break
-            else:
-                print(f'{self.name} сражается {count_day} день(дня), осталось {count_warriors} воинов')
-                count_day += 1
-                count_warriors -= self.power
-                time.sleep(1)
+        while count_warriors > 0:
+            print(f'{self.name} сражается {count_day} день(дня), осталось {count_warriors} воинов \n{self.name}'
+                  f' одержал победу {count_day} спустя')
+            count_day += 1
+            count_warriors -= self.power
+            time.sleep(1)
+        if count_warriors < 0:
+            print(f'{self.name} сражается {count_day} день(дня), осталось 0 воинов')
+        else:
+            print(f'{self.name} сражается {count_day} день(дня), осталось {count_warriors} воинов')
+
 
 
 first_knight = Knight('Sir Lancelot', 10)
